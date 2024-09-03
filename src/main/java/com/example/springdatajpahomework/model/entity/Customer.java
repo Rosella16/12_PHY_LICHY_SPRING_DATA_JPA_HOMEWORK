@@ -1,6 +1,8 @@
 package com.example.springdatajpahomework.model.entity;
 
 
+import com.example.springdatajpahomework.model.dto.response.CustomerResponse;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,22 +13,29 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@Builder
+//@Builder
 @Table(name = "customers")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long customer_id;
+    private Long customerId;
+    private String customerName;
+    private String address;
+    private String phoneNumber;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "email_id", unique = true)
+    @JsonManagedReference
     private Email email;
 
-    private String customer_name;
-    private String address;
-    private String phone_number;
     @OneToMany(mappedBy = "customer")
     private List<Order> orders = new ArrayList<>();
+
+
+    public CustomerResponse toResponse() {
+        return new CustomerResponse(customerId, customerName, address, phoneNumber, email);
+    }
+
 }

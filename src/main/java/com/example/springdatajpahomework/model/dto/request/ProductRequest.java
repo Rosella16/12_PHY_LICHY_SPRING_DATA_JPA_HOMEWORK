@@ -1,6 +1,5 @@
 package com.example.springdatajpahomework.model.dto.request;
 
-import com.example.springdatajpahomework.model.dto.response.ProductResponse;
 import com.example.springdatajpahomework.model.entity.Product;
 import lombok.*;
 
@@ -11,15 +10,15 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 public class ProductRequest {
-    private String product_name;
-    private BigDecimal unit_price;
+    private String productName;
+    private Double unitPrice;
     private String description;
 
     public Product toEntity(){
         return new Product(
                 null,
-                this.product_name,
-                this.unit_price,
+                this.productName,
+                this.unitPrice,
                 this.description,
                 null);
     }
@@ -27,8 +26,8 @@ public class ProductRequest {
     public Product toEntity(Long product_id) {
         return new Product(
                 product_id,
-                this.product_name,
-                this.unit_price,
+                this.productName,
+                this.unitPrice,
                 this.description,
                 null);
     }

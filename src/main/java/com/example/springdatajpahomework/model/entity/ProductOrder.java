@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serializable;
-
 @Entity
 @Getter
 @Setter
@@ -31,4 +29,8 @@ public class ProductOrder {
    @Column
     private Integer quantity;
 
+    public ProductOrder(Product product, Order order) {
+        this.product = product;
+        this.order = order;
+    }
 }

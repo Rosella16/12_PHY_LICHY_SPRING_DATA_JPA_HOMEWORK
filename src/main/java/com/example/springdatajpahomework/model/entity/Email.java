@@ -1,6 +1,8 @@
 package com.example.springdatajpahomework.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,5 +25,12 @@ public class Email {
     private String email;
 
     @OneToOne(mappedBy = "email")
+//    @JsonIgnore
+    @JsonBackReference
     private Customer customer;
+
+    public Email(long id, String email) {
+        this.id = id;
+        this.email = email;
+    }
 }

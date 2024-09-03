@@ -20,15 +20,17 @@ import java.util.Set;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long product_id;
-    private String product_name;
-    private BigDecimal unit_price;
+    private Long productId;
+    private String productName;
+    private Double unitPrice;
     private String description;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<ProductOrder> productOrders = new HashSet<>();
 
-
+    public ProductResponse toResponse() {
+        return new ProductResponse(productId, productName, unitPrice, description);
+    }
 
 }
